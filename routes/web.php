@@ -32,17 +32,17 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
     
     dump($trnaslation->trans('greetings.good_buy'));
     
-    echo $trnaslation->transChoice('messages.count', 0) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 1) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 2) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 3) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 4) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 9) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 10) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 11) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 30) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 100) . '<br>';
-    echo $trnaslation->transChoice('messages.count', 302) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 0) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 1) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 2) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 3) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 4) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 9) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 10) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 11) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 30) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 100) . '<br>';
+    echo $trnaslation->transChoice('messages.advanced_count', 302) . '<br>';
     echo '<br><br>';
     echo $trnaslation->trans('messages.new_message');
 });
