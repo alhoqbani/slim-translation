@@ -6,6 +6,8 @@ return [
       'name' => getenv('APP_NAME'),
       'url' => getenv('APP_URL'),
       'env' => getenv('APP_ENV'),
+      'locale' => 'ar',
+      'default_locale' => 'en'
     ],
     
     'twig' => [

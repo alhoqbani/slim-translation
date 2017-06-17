@@ -8,9 +8,6 @@ use Symfony\Component\Translation\Loader\ArrayLoader;
 $app->get('/home', HomeController::class . ':index');
 
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, $args) {
-    
-    dump($this->translator->trans('greetings.good_buy'));
-    
     echo $this->translator->transChoice('messages.advanced_count', 0) . '<br>';
     echo $this->translator->transChoice('messages.advanced_count', 1) . '<br>';
     echo $this->translator->transChoice('messages.advanced_count', 2) . '<br>';

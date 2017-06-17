@@ -30,27 +30,25 @@ $container['db'] = function ($c) {
 };
 
 $container['translator'] = function ($c) {
-    $ar = ROOT . 'resources/lang/ar/greetings.json';
+    $config = $c['settings'];
     
-    $ar = [
-        'greetings' => require ROOT . 'resources/lang/ar/greetings.php',
-        'messages'  => require ROOT . 'resources/lang/ar/messages.php',
-    ];
+    $langPath = ROOT . 'resources/lang/';
+    $locals = array_diff(scandir($langPath), ['.', '..']);
+    $files = [];
+    foreach ($locals as $local) {
+        $files[$local] = array_diff(scandir($langPath . $local), ['.', '..']);
+    };
     
-    $en = [
-        'greetings' => require ROOT . 'resources/lang/en/greetings.php',
-        'messages'  => require ROOT . 'resources/lang/en/messages.php',
-    ];
-    
-    // Choose on locale:
-    $translator = new Translator('ar');
-    
-    $translator->setFallbackLocales(['ar', 'en']);
-    
+    $translator = new Translator($config['app']['locale']);
+    $translator->setFallbackLocales([$config['app']['locale'], $config['app']['default_locale']]);
     $translator->addLoader('array', new ArrayLoader());
     
-    $translator->addResource('array', $en, 'en');
-    $translator->addResource('array', $ar, 'ar');
+    foreach ($files as $local => $localeFiles) {
+        foreach ($localeFiles as $file) {
+            $array[trim($file, '.php')] = include "{$langPath}{$local}/{$file}";
+            $translator->addResource('array', $array, $local);
+        }
+    }
     
     return $translator;
 };
