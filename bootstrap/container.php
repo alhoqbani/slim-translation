@@ -1,5 +1,6 @@
 <?php
 
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
 
@@ -31,23 +32,18 @@ $container['db'] = function ($c) {
 
 $container['translator'] = function ($c) {
     $config = $c['settings'];
-    
-    $langPath = ROOT . 'resources/lang/';
-    $locals = array_diff(scandir($langPath), ['.', '..']);
-    $files = [];
-    foreach ($locals as $local) {
-        $files[$local] = array_diff(scandir($langPath . $local), ['.', '..']);
-    };
+    $langPath = ROOT . 'resources/lang';
     
     $translator = new Translator($config['app']['locale']);
     $translator->setFallbackLocales([$config['app']['locale'], $config['app']['default_locale']]);
     $translator->addLoader('array', new ArrayLoader());
     
-    foreach ($files as $local => $localeFiles) {
-        foreach ($localeFiles as $file) {
-            $array[trim($file, '.php')] = include "{$langPath}{$local}/{$file}";
-            $translator->addResource('array', $array, $local);
-        }
+    $finder = new Finder();
+    $finder->files()->ignoreUnreadableDirs()->in($langPath);
+    
+    foreach ($finder as $file) {
+        $array[trim($file->getBasename(), '.php')] = include $file->getRealPath();
+        $translator->addResource('array', $array, $file->getRelativePath());
     }
     
     return $translator;
