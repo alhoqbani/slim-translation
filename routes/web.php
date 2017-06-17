@@ -10,16 +10,22 @@ $app->get('/home', HomeController::class . ':index');
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, $args) {
     $ar = ROOT . 'resources/lang/ar/greetings.json';
     
-    $en = ROOT . 'resources/lang/en/greetings.json';
+    $ar = [
+        'greetings' => require ROOT . 'resources/lang/ar/greetings.php',
+    ];
+    
+    $en = [
+        'greetings' => require ROOT . 'resources/lang/en/greetings.php',
+    ];
     
     // Choose on locale:
     $trnaslation = new Symfony\Component\Translation\Translator('ar');
 //    $trnaslation = new Symfony\Component\Translation\Translator('en');
     
-    $trnaslation->addLoader('json', new JsonFileLoader());
+    $trnaslation->addLoader('array', new ArrayLoader());
     
-    $trnaslation->addResource('json', $en, 'en', 'greetings');
-    $trnaslation->addResource('json', $ar, 'ar', 'greetings');
+    $trnaslation->addResource('array', $en, 'en');
+    $trnaslation->addResource('array', $ar, 'ar');
     
-    dump($trnaslation->trans('good_buy', [], 'greetings'));
+    dump($trnaslation->trans('greetings.good_buy'));
 });
