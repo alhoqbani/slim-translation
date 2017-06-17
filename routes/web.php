@@ -9,19 +9,22 @@ $app->get('/home', HomeController::class . ':index');
 
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response, $args) {
     
-    $translations = [
-        'key'       => 'tranlation',
-        'greetings' => [
-            'welcome' => 'Welcome',
-        ],
-        'messages'  => [
-            'new_message' => 'You got a new message',
-        ],
-    
+    $ar = [
+        'greetings' => require ROOT . 'resources/lang/ar/greetings.php',
     ];
-    $trnaslation = new Symfony\Component\Translation\Translator('en');
-    $trnaslation->addLoader('array', new ArrayLoader());
-    $trnaslation->addResource('array', $translations, 'en');
     
-    dump($trnaslation->trans('messages.new_message'));
+    $en = [
+        'greetings' => require ROOT . 'resources/lang/en/greetings.php',
+    ];
+    
+    // Choose on locale:
+    $trnaslation = new Symfony\Component\Translation\Translator('ar');
+//    $trnaslation = new Symfony\Component\Translation\Translator('en');
+    
+    $trnaslation->addLoader('array', new ArrayLoader());
+    
+    $trnaslation->addResource('array', $en, 'en');
+    $trnaslation->addResource('array', $ar, 'ar');
+    
+    dump($trnaslation->trans('greetings.good_buy'));
 });
