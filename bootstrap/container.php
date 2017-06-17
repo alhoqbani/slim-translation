@@ -1,5 +1,6 @@
 <?php
 
+use App\Views\TranslatorTwigExtension;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Translator;
@@ -15,6 +16,7 @@ $container['view'] = function ($c) {
         ]);
     
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $c['request']->getUri()));
+    $view->addExtension(new TranslatorTwigExtension($c['translator']));
     
     return $view;
 };

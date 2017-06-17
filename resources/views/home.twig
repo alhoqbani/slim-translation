@@ -1,4 +1,8 @@
 <h1>Welcome Home</h1>
 {% for user in users %}
-{{ user.name }}
+    {{ user.name }}
 {% endfor %}
+
+{{ trans('greetings.welcome', {"%name%": "Hamoud Alhoqbani"}) }}
+<br>
+{{ trans_choice('messages.advanced_count', 9 , {"%count%": 9}) }}
