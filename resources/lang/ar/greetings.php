@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'welcome'  => 'مرحبا',
+    'welcome'  => '%name% مرحبا',
     'good_buy' => 'مع السلامة',
 ];

@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'welcome'  => 'Welcome',
+    'welcome'  => 'Welcome %name%',
     'good_buy' => 'Good Buy',
 ];
