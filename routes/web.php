@@ -19,8 +19,9 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
     ];
     
     // Choose on locale:
-    $trnaslation = new Symfony\Component\Translation\Translator('ar');
-//    $trnaslation = new Symfony\Component\Translation\Translator('en');
+    $trnaslation = new Symfony\Component\Translation\Translator('fr');
+    
+    $trnaslation->setFallbackLocales(['ar', 'en']);
     
     $trnaslation->addLoader('array', new ArrayLoader());
     
